@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.css';
 import Image from 'next/image';
+import MeetingList from '../components/MeetingList';
 
 export default function Home() {
 
@@ -24,17 +25,12 @@ export default function Home() {
       <div className={styles.container}>
         <div className={styles.main}>
           {dummyInfo.map(d => (
-            <div className={styles.item} key={d.id}>
-              <h1>{d.title}</h1>
-              <Image
-                src={d.image}
-                alt='meetup place'
-                width={600}
-                height={400}
-              />
-              <h2>{d.location}</h2>
-              <p>{d.description}</p>
-            </div>
+            <MeetingList 
+              key={d.id}
+              title={d.title}
+              image={d.image}
+              location={d.location}
+            />
           ))}
         </div>
       </div>
