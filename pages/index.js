@@ -2,8 +2,18 @@ import styles from '../styles/Home.module.css';
 import Image from 'next/image';
 import MeetingList from '../components/MeetingList';
 
-export default function Home() {
+export default function Home({meetings}) {
 
+  return (
+      <div className={styles.container}>
+        <div className={styles.main}>
+            <MeetingList info={meetings}/>
+        </div>
+      </div>
+    )
+}
+
+export function getStaticProps() {
   const dummyInfo = [
     {
       id: 'id1',
@@ -21,11 +31,9 @@ export default function Home() {
     },
   ]
 
-  return (
-      <div className={styles.container}>
-        <div className={styles.main}>
-            <MeetingList info={dummyInfo}/>
-        </div>
-      </div>
-    )
+  return({
+    props:{
+      meetings: dummyInfo
+    }
+  })
 }
