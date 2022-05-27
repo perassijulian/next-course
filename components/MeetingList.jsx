@@ -6,7 +6,7 @@ const MeetingList = ({ info }) => {
   const router = useRouter();
 
   const handleClick = (id) => {
-    router.push(`/meetup/${id}`)
+    router.push(`/meeting/${id}`)
   }
 
   return (
@@ -17,7 +17,7 @@ const MeetingList = ({ info }) => {
           <h1>{d.title}</h1>
           <Image
             src={d.image}
-            alt='meetup place'
+            alt='meeting place'
             width={600}
             height={400}
           />

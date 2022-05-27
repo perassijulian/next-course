@@ -1,4 +1,5 @@
 import SingleMeeting from '../../components/SingleMeeting';
+import { MongoClient } from 'mongodb';
 
 const meeting = ({meeting}) => {
   return (
@@ -8,31 +9,37 @@ const meeting = ({meeting}) => {
 
 export default meeting
 
-export function getStaticPaths () {
+export async function getStaticPaths () {
+  const client = await MongoClient .connect("mongodb+srv://julian:julian123@cluster0.dhn1u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+  const db = client.db();
+  const meetingsCollection = db.collection('meetings')
+  const data = await meetingsCollection.find({}).toArray();
+  client.close()
+
+  const paths = data.map(item => ({params:{meetID: item.id}}))
+
   return({
     fallback: true,
-    paths:[
-      {params:{
-        meetID: 'id1'
-      }},
-      {params:{
-        meetID: 'id2'
-      }},
-    ]
+    paths
   })
 }
 
-export function getStaticProps () {
-  const meetingInfo= {
-      id: 'id1',
-      title: 'this is the first meeting',
-      location: 'first location',
-      image: 'https://a.storyblok.com/f/58806/1164x784/20ee327044/berlin_city_01_skyline_unsplash.jpeg',
-      description: 'description from the first meeting',
+export async function getStaticProps (context) {
+  const client = await MongoClient .connect("mongodb+srv://julian:julian123@cluster0.dhn1u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+  const db = client.db();
+  const meetingsCollection = db.collection('meetings')
+  const data = await meetingsCollection.findOne({ id: context.params.meetID })
+  client.close()
+
+  const meeting = {
+    title: data.title,
+    location: data.location,
+    description: data.description,
+    image: data.image,
   }
 
   return({
     props: 
-      { meeting: meetingInfo}
+      { meeting }
   })
 }

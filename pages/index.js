@@ -16,23 +16,6 @@ export default function Home({meetings}) {
 }
 
 export async function getStaticProps() {
-  const dummyInfo = [
-    {
-      id: 'id1',
-      title: 'this is the first meeting',
-      location: 'first location',
-      image: 'https://a.storyblok.com/f/58806/1164x784/20ee327044/berlin_city_01_skyline_unsplash.jpeg',
-      description: 'description from the first meeting',
-    },
-    {
-      id: 'id2',
-      title: 'this is the second meeting',
-      location: 'second location',
-      image: 'https://a.storyblok.com/f/58806/1164x784/20ee327044/berlin_city_01_skyline_unsplash.jpeg',
-      description: 'description from the second meeting',
-    },
-  ]
-
   const client = await MongoClient .connect("mongodb+srv://julian:julian123@cluster0.dhn1u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
   const db = client.db();
   const meetingsCollection = db.collection('meetings')
@@ -45,8 +28,6 @@ export async function getStaticProps() {
     description: meeting.description,
     image: meeting.image,
   }))
-
-  console.log(meetings)
 
   return({
     props:{
