@@ -24,14 +24,7 @@ export default function Home() {
   return (
       <div className={styles.container}>
         <div className={styles.main}>
-          {dummyInfo.map(d => (
-            <MeetingList 
-              key={d.id}
-              title={d.title}
-              image={d.image}
-              location={d.location}
-            />
-          ))}
+            <MeetingList info={dummyInfo}/>
         </div>
       </div>
     )

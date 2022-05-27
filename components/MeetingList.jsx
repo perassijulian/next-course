@@ -2,26 +2,29 @@ import styles from '../styles/SingleMeeting.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-const MeetingList = ({ title, image, location }) => {
+const MeetingList = ({ info }) => {
   const router = useRouter();
 
-  const handleClick = () => {
-    router.push(`/meetup/${title}`)
+  const handleClick = (id) => {
+    router.push(`/meetup/${id}`)
   }
 
   return (
     <div className={styles.container}>
-        <div className={styles.item}>
-            <h1>{title}</h1>
-            <Image
-              src={image}
-              alt='meetup place'
-              width={600}
-              height={400}
-            />
-            <h2>{location}</h2>
-            <button onClick={handleClick}>View meeting</button>
-        </div>
+        
+      {info.map(d => (
+        <div className={styles.item} key={d.id}>
+          <h1>{d.title}</h1>
+          <Image
+            src={d.image}
+            alt='meetup place'
+            width={600}
+            height={400}
+          />
+          <h2>{d.location}</h2>
+          <button onClick={() => handleClick(d.id)}>View meeting</button>
+        </div>       
+      ))}
     </div>
   )
 }
