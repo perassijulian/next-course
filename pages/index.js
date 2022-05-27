@@ -1,6 +1,8 @@
 import styles from '../styles/Home.module.css';
 import Image from 'next/image';
 import MeetingList from '../components/MeetingList';
+import { MongoClient } from 'mongodb';
+
 
 export default function Home({meetings}) {
 
@@ -13,7 +15,7 @@ export default function Home({meetings}) {
     )
 }
 
-export function getStaticProps() {
+export async function getStaticProps() {
   const dummyInfo = [
     {
       id: 'id1',
@@ -31,9 +33,24 @@ export function getStaticProps() {
     },
   ]
 
+  const client = await MongoClient .connect("mongodb+srv://julian:julian123@cluster0.dhn1u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+  const db = client.db();
+  const meetingsCollection = db.collection('meetings')
+  const data = await meetingsCollection.find({}).toArray();
+
+  const meetings = data.map(meeting => ({
+    id: meeting.id,
+    title: meeting.title,
+    location: meeting.location,
+    description: meeting.description,
+    image: meeting.image,
+  }))
+
+  console.log(meetings)
+
   return({
     props:{
-      meetings: dummyInfo
+      meetings
     }
   })
 }

@@ -1,6 +1,6 @@
 import AddForm from "../components/addForm"
 
-const addMeetup = () => {
+const addMeeting = () => {
   return (
     <div>
         <AddForm />
@@ -8,4 +8,4 @@ const addMeetup = () => {
   )
 }
 
-export default addMeetup
+export default addMeeting

@@ -8,8 +8,8 @@ const Navbar = () => {
             <a><span className={styles.logo}>JULI</span></a>
         </Link>
         <ul className={styles.list}>
-            <Link href='/portfolio'>
-                <a><li className={styles.item}>PORTFOLIO</li></a>
+            <Link href='/add-meeting'>
+                <a><li className={styles.item}>ADD</li></a>
             </Link>
             <Link href='/blog'>
                <a><li className={styles.item}>BLOG</li></a>

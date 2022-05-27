@@ -1,6 +1,7 @@
 import addStyles from '../styles/AddForm.module.css';
 
 import { useState } from "react"
+import axios from 'axios';
 
 const AddForm = () => {
     const [formData, setFormData] = useState({})
@@ -12,9 +13,11 @@ const AddForm = () => {
         }))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+        const res = await axios.post('/api/new-meeting', 
+            {...formData, id: formData.title.replaceAll(' ', '-')}
+        );
     }
         
     return (
