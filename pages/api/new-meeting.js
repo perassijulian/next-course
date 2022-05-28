@@ -1,23 +1,25 @@
-import { MongoClient } from 'mongodb';
+import Meeting from "../../models/Meeting";
+import { connectDb } from "../../utils/mongoose";
+
+connectDb();
 
 export default async function handler(req, res) {
     if(req.method === 'POST') {
         try {
-            const client = await MongoClient.connect("mongodb+srv://julian:julian123@cluster0.dhn1u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-            const db = client.db();
-            const meetingsCollection = db.collection('meetings')
-            const exists = await meetingsCollection.findOne({id: req.body.id})
+            const exists = await Meeting.findOne({id: req.body.id})
             if (!exists) {
-                await meetingsCollection.insertOne(req.body)
-                res.status(201).json({status: 'meeting added'})
+                const newMeeting = new Meeting(req.body)
+                const savedMeeting = await newMeeting.save();
+                res.status(201).json(savedMeeting)
             } else {
                 res.status(201).json({status: 'meeting title duplicated'})
                 console.log('meeting duplicated')
             }
-            client.close()
         } catch (error) {
             console.log(error)
             res.status(400).json({status: error})
         }
+    } else {
+        res.status(400).json(`Method: ${req.method} not supported on this endpoint`)
     }
 }
