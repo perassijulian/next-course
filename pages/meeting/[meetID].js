@@ -1,5 +1,6 @@
 import SingleMeeting from '../../components/SingleMeeting';
-import { MongoClient } from 'mongodb';
+import { connectDb } from '../../utils/mongoose';
+import Meeting from '../../models/Meeting';
 
 const meeting = ({meeting}) => {
   return (
@@ -10,11 +11,8 @@ const meeting = ({meeting}) => {
 export default meeting
 
 export async function getStaticPaths () {
-  const client = await MongoClient .connect("mongodb+srv://julian:julian123@cluster0.dhn1u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-  const db = client.db();
-  const meetingsCollection = db.collection('meetings')
-  const data = await meetingsCollection.find({}).toArray();
-  client.close()
+  connectDb()
+  const data = await Meeting.find({});
 
   const paths = data.map(item => ({params:{meetID: item.id}}))
 
@@ -25,11 +23,8 @@ export async function getStaticPaths () {
 }
 
 export async function getStaticProps (context) {
-  const client = await MongoClient .connect("mongodb+srv://julian:julian123@cluster0.dhn1u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-  const db = client.db();
-  const meetingsCollection = db.collection('meetings')
-  const data = await meetingsCollection.findOne({ id: context.params.meetID })
-  client.close()
+  connectDb()
+  const data = await Meeting.findOne({ id: context.params.meetID });
 
   const meeting = {
     title: data.title,

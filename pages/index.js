@@ -1,7 +1,8 @@
 import styles from '../styles/Home.module.css';
-import Image from 'next/image';
+// import Image from 'next/image';
 import MeetingList from '../components/MeetingList';
-import { MongoClient } from 'mongodb';
+import { connectDb } from '../utils/mongoose';
+import Meeting from '../models/Meeting';
 
 
 export default function Home({meetings}) {
@@ -16,11 +17,10 @@ export default function Home({meetings}) {
 }
 
 export async function getStaticProps() {
-  const client = await MongoClient .connect("mongodb+srv://julian:julian123@cluster0.dhn1u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-  const db = client.db();
-  const meetingsCollection = db.collection('meetings')
-  const data = await meetingsCollection.find({}).toArray();
+  connectDb();
 
+  const data = await Meeting.find({});
+  
   const meetings = data.map(meeting => ({
     id: meeting.id,
     title: meeting.title,

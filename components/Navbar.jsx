@@ -8,14 +8,11 @@ const Navbar = () => {
             <a><span className={styles.logo}>JULI</span></a>
         </Link>
         <ul className={styles.list}>
+            <Link href='/'>
+            <a><li className={styles.item}>MEETINGS</li></a>
+            </Link>
             <Link href='/add-meeting'>
                 <a><li className={styles.item}>ADD</li></a>
-            </Link>
-            <Link href='/blog'>
-               <a><li className={styles.item}>BLOG</li></a>
-            </Link>
-            <Link href='/code'>
-                <a><li className={styles.item}>CODE</li></a>
             </Link>
         </ul>
     </div>

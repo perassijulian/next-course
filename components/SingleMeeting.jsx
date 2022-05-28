@@ -12,8 +12,12 @@ const SingleMeeting = ({ meeting }) => {
             width={600}
             height={400}
             />
-            <h2>{meeting.location}</h2>
+            <h2 className={styles.address}>{meeting.location}</h2>
             <p>{meeting.description}</p>
+            <div className={styles.buttonWrapper}>
+              <span></span>
+              <button className={styles.button}>Edit meeting</button>
+            </div>
         </div>
     </div>
   )

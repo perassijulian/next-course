@@ -1,4 +1,4 @@
-import styles from '../styles/SingleMeeting.module.css';
+import styles from '../styles/MeetingList.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
@@ -21,8 +21,11 @@ const MeetingList = ({ info }) => {
             width={600}
             height={400}
           />
-          <h2>{d.location}</h2>
-          <button onClick={() => handleClick(d.id)}>View meeting</button>
+          <h2 className={styles.address}>{d.location}</h2>
+          <div className={styles.buttonWrapper}>
+            <button className={styles.button} onClick={() => handleClick(d.id)}>View meeting</button>
+            <button className={styles.button} onClick={() => handleClick(d.id)}>Edit meeting</button>
+          </div>       
         </div>       
       ))}
     </div>
