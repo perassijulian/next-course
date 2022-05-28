@@ -5,10 +5,6 @@ import { useRouter } from 'next/router';
 const MeetingList = ({ info }) => {
   const router = useRouter();
 
-  const handleClick = (id) => {
-    router.push(`/meeting/${id}`)
-  }
-
   return (
     <div className={styles.container}>
         
@@ -23,8 +19,8 @@ const MeetingList = ({ info }) => {
           />
           <h2 className={styles.address}>{d.location}</h2>
           <div className={styles.buttonWrapper}>
-            <button className={styles.button} onClick={() => handleClick(d.id)}>View meeting</button>
-            <button className={styles.button} onClick={() => handleClick(d.id)}>Edit meeting</button>
+            <button className={styles.button} onClick={() => router.push(`/meeting/${d.id}`)}>View meeting</button>
+            <button className={styles.button} onClick={() => router.push(`/meeting/${d.id}/edit`)}>Edit meeting</button>
           </div>       
         </div>       
       ))}

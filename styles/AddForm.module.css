@@ -22,7 +22,7 @@
 }
 
 .button{
-    margin-top: 10px;
+    margin: 10px 5px;
     cursor: pointer;
     width: 200px;
     padding: 5px;

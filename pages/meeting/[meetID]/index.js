@@ -1,6 +1,6 @@
-import SingleMeeting from '../../components/SingleMeeting';
-import { connectDb } from '../../utils/mongoose';
-import Meeting from '../../models/Meeting';
+import SingleMeeting from '../../../components/SingleMeeting';
+import { connectDb } from '../../../utils/mongoose';
+import Meeting from '../../../models/Meeting';
 
 const meeting = ({meeting}) => {
   return (

@@ -1,4 +1,4 @@
-import AddForm from "../components/addForm"
+import AddForm from "../components/AddForm"
 
 const addMeeting = () => {
   return (

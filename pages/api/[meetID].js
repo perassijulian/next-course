@@ -5,6 +5,14 @@ connectDb();
 
 export default async function handler(req, res) {
     switch (req.method) {
+        case "GET":
+            try {
+                const meeting = await Meeting.findOne({id : req.query.meetID})
+                if (!meeting) return res.status(400).json("Meeting not found"); 
+                return res.status(200).json(meeting)
+            } catch (error) {
+                return res.status(400).json(error.message)
+            };
         case "PUT":
             try {
                 const updatedMeeting = await Meeting.findOneAndUpdate({id : req.query.meetID},
@@ -15,7 +23,7 @@ export default async function handler(req, res) {
                 return res.status(200).json(updatedMeeting)
             } catch (error) {
                 return res.status(400).json(error.message)
-            }
+            };
         case "DELETE":
             try {
                 const deletedMeeting = await Meeting.findOneAndDelete({id : req.query.meetID})
@@ -23,7 +31,7 @@ export default async function handler(req, res) {
                 return res.status(200).json('Meeting deleted')
             } catch (error) {
                 return res.status(400).json(error.message)
-            }
+            };
         default:
             return res.status(400).json(`Method: ${req.method} not supported on this endpoint`)
     }
