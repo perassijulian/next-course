@@ -12,33 +12,33 @@ const SingleMeeting = ({ meeting }) => {
   };
   return (
     <div className={styles.container}>
-      <div className={styles.item}>
-        <h1>{meeting.title}</h1>
-        <img
-          className={styles.img}
-          src={meeting.image}
-          alt="meetup place"
-        />
-        <h2 className={styles.address}>{meeting.location}</h2>
-        <p className={styles.description}>{meeting.description}</p>
-        <div className={styles.buttonWrapper}>
-          <button
-            onClick={() => {
-              router.push(`/meeting/${router.query.meetID}/edit`);
-            }}
-            className={styles.button}
-          >
-            Edit meeting
-          </button>
-          <button
-            onClick={handleDelete}
-            className={styles.button}
-            style={{ backgroundColor: "red" }}
-          >
-            Delete meeting
-          </button>
+      {meeting ? (
+        "loading"
+      ) : (
+        <div className={styles.item}>
+          <h1>{meeting.title}</h1>
+          <img className={styles.img} src={meeting.image} alt="meetup place" />
+          <h2 className={styles.address}>{meeting.location}</h2>
+          <p className={styles.description}>{meeting.description}</p>
+          <div className={styles.buttonWrapper}>
+            <button
+              onClick={() => {
+                router.push(`/meeting/${router.query.meetID}/edit`);
+              }}
+              className={styles.button}
+            >
+              Edit meeting
+            </button>
+            <button
+              onClick={handleDelete}
+              className={styles.button}
+              style={{ backgroundColor: "red" }}
+            >
+              Delete meeting
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
