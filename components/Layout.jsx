@@ -5,7 +5,7 @@ const Layout = ({children}) => {
   return (
     <>
         <Head>
-            <title>Juli App</title>
+            <title>Meetings App</title>
         </Head>
         <main>
             <Navbar />

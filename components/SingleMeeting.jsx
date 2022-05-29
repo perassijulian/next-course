@@ -14,11 +14,10 @@ const SingleMeeting = ({ meeting }) => {
     <div className={styles.container}>
       <div className={styles.item}>
         <h1>{meeting.title}</h1>
-        <Image
+        <img
+          className={styles.img}
           src={meeting.image}
           alt="meetup place"
-          width={600}
-          height={400}
         />
         <h2 className={styles.address}>{meeting.location}</h2>
         <p className={styles.description}>{meeting.description}</p>

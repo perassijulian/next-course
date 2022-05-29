@@ -11,11 +11,10 @@ const MeetingList = ({ info }) => {
       {info.map(d => (
         <div className={styles.item} key={d.id}>
           <h1>{d.title}</h1>
-          <Image
+          <img
+            className={styles.img}
             src={d.image}
             alt='meeting place'
-            width={600}
-            height={400}
           />
           <h2 className={styles.address}>{d.location}</h2>
           <div className={styles.buttonWrapper}>

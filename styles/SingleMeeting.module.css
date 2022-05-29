@@ -10,6 +10,10 @@
   align-items: center;
 }  
 
+.img{
+  width: 600px;
+}
+
 .address{
   font-weight: 300;
   font-style: italic;
