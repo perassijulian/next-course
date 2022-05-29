@@ -4,9 +4,19 @@
   align-items: center;
 }  
 
+.item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}  
+
 .address{
   font-weight: 300;
   font-style: italic;
+}
+
+.description{
+  max-width: 860px;
 }
 
 .buttonWrapper{

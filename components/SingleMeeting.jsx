@@ -1,34 +1,47 @@
-import styles from '../styles/SingleMeeting.module.css';
-import Image from 'next/image';
-import axios from 'axios';
-import { useRouter } from 'next/router';
+import styles from "../styles/SingleMeeting.module.css";
+import Image from "next/image";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const SingleMeeting = ({ meeting }) => {
   const router = useRouter();
 
-  const handleDelete = async() => {
+  const handleDelete = async () => {
     await axios.delete(`/api/${router.query.meetID}`);
-    await router.push('/');
-  }
+    await router.push("/");
+  };
   return (
     <div className={styles.container}>
-          <div className={styles.item}>
-            <h1>{meeting.title}</h1>
-            <Image
-            src={meeting.image}
-            alt='meetup place'
-            width={600}
-            height={400}
-            />
-            <h2 className={styles.address}>{meeting.location}</h2>
-            <p>{meeting.description}</p>
-            <div className={styles.buttonWrapper}>
-              <button onClick={() => {router.push(`/meeting/${router.query.meetID}/edit`)}} className={styles.button}>Edit meeting</button>
-              <button onClick={handleDelete} className={styles.button} style={{"backgroundColor":"red"}}>Delete meeting</button>
-            </div>
+      <div className={styles.item}>
+        <h1>{meeting.title}</h1>
+        <Image
+          src={meeting.image}
+          alt="meetup place"
+          width={600}
+          height={400}
+        />
+        <h2 className={styles.address}>{meeting.location}</h2>
+        <p className={styles.description}>{meeting.description}</p>
+        <div className={styles.buttonWrapper}>
+          <button
+            onClick={() => {
+              router.push(`/meeting/${router.query.meetID}/edit`);
+            }}
+            className={styles.button}
+          >
+            Edit meeting
+          </button>
+          <button
+            onClick={handleDelete}
+            className={styles.button}
+            style={{ backgroundColor: "red" }}
+          >
+            Delete meeting
+          </button>
         </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default SingleMeeting
+export default SingleMeeting;

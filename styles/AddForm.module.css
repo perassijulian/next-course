@@ -29,3 +29,11 @@
     border: none;
     border-radius: 5px;
 }
+
+.error{
+    margin: 0%;
+    font-weight: 700;
+    color: red;
+    width: 100%;
+    text-align: start;
+}
