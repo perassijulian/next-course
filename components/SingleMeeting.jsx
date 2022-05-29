@@ -12,7 +12,7 @@ const SingleMeeting = ({ meeting }) => {
   };
   return (
     <div className={styles.container}>
-      {meeting ? (
+      {!meeting ? (
         "loading"
       ) : (
         <div className={styles.item}>
